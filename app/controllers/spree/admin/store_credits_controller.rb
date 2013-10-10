@@ -49,7 +49,12 @@ module Spree
     end
 
     def collection
-      super.available.page(params[:page])
+      email = "#{params[:search]}%"
+      results = super.available
+      if params[:search].present?
+        results = results.where('email like ?', email)
+      end
+      results.page(params[:page])
     end
   end
 end

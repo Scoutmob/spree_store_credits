@@ -2,8 +2,29 @@
 
 <%= link_to_with_icon('add', t('add_store_credit'), new_admin_store_credit_url) %>
 
-<br>
-<br>
+<div id="table-filter" class="sixteen columns">
+  <fieldset>
+    <legend align="center">Search</legend>
+    <div data-hook="admin_store_credits_index_search">
+      <%= form_tag admin_store_credits_path, {method: :get} do %>
+        <%= hidden_field_tag :page, 1 %>
+        <div class="field-block alpha sixteen columns omega">
+          <%= label_tag :search %>
+          <%= text_field_tag :search, params[:search] %>
+        </div>
+        <div class="form-buttons actions filter-actions" data-hook="admin_store_credits_index_search">
+          <%= button t(:search), 'icon-search' %>
+        </div>
+        <div class="actions filter-actions">
+        <div data-hook="admin_orders_index_search_buttons">
+          <%= button t(:filter_results), 'icon-search' %>
+          <!-- <button class="icon-search button" name="button" type="submit"><span class="translation_missing" title="translation missing: en.filter_results">Filter Results</span></button> -->
+        </div>
+      </div>
+      <% end %>  
+    </div>
+  </fieldset>
+</div>
 
 <table class="index">
   <thead>
