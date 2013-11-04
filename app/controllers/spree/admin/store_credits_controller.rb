@@ -19,9 +19,9 @@ module Spree
         end
 
         # Create pending credits
-        user_emails = users.collect(&:email)
-        (emails - user_emails).each do |email|
-          unless email.blank?
+        user_emails = Set.new(users.map { |u| u.email.downcase })
+        emails.each do |email|
+          if email.present? and !user_emails.include?(email.downcase)
             credit_params = params[:store_credit].dup
             credit_params[:email] = email
             Spree::StoreCredit.create credit_params
