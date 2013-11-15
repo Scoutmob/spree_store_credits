@@ -2,6 +2,10 @@
   <%= f.label :amount, t("amount")%><br />
   <%= f.text_field :amount %>
 <% end %>
+<%= f.field_container :description do %>
+  <%= f.label :category, t("category")%><br />
+  <%= f.select :category, options_for_select(Spree::StoreCredit::CREDIT_CATEGORIES.collect {|c| [c.humanize, c]}, 'customer_service') %>
+<% end %>
 <%= f.field_container :reason do %>
   <%= f.label :reason, t("reason")%><br />
   <%= f.text_field :reason %>
@@ -9,10 +13,6 @@
 <%= f.field_container :description do %>
   <%= f.label :description, t("description")%><br />
   <%= f.text_area :description %>
-<% end %>
-<%= f.field_container :description do %>
-  <%= f.label :category, t("description")%><br />
-  <%= f.select :category, Spree::StoreCredit::CREDIT_CATEGORIES.collect {|c| [c.humanize, c]} %>
 <% end %>
 <%= f.field_container :expiration_date do %>
   <%= f.label :expiration_date, t("expiration date")%><br />
